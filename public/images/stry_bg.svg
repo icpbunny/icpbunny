@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="159.752" height="159.752" viewBox="0 0 159.752 159.752">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_4187" data-name="Path 4187" d="M602.534,13.015V125.976H489.572Z" transform="translate(-489.572 -13.015)" fill="none" stroke="#60d3a0" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="stry_bg" transform="translate(-355.384 416.855) rotate(-45)">
+    <g id="Group_964" data-name="Group 964" transform="translate(489.572 13.015)" clip-path="url(#clip-path)">
+      <line id="Line_43" data-name="Line 43" x1="160.87" y2="160.87" transform="translate(1.484 -46.424)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_44" data-name="Line 44" x1="160.87" y2="160.87" transform="translate(8.476 -39.432)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_45" data-name="Line 45" x1="160.87" y2="160.87" transform="translate(15.468 -32.44)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_46" data-name="Line 46" x1="160.87" y2="160.87" transform="translate(22.46 -25.448)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_47" data-name="Line 47" x1="160.87" y2="160.87" transform="translate(29.452 -18.456)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_48" data-name="Line 48" x1="160.87" y2="160.87" transform="translate(36.444 -11.464)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_49" data-name="Line 49" x1="160.87" y2="160.87" transform="translate(43.436 -4.473)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_50" data-name="Line 50" x1="160.87" y2="160.87" transform="translate(50.428 2.519)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_51" data-name="Line 51" x1="160.87" y2="160.87" transform="translate(57.42 9.511)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_52" data-name="Line 52" x1="160.87" y2="160.87" transform="translate(64.412 16.503)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_53" data-name="Line 53" x1="160.87" y2="160.87" transform="translate(71.404 23.495)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_54" data-name="Line 54" x1="160.87" y2="160.87" transform="translate(78.396 30.487)" fill="none" stroke="#60d3a0" stroke-miterlimit="10" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

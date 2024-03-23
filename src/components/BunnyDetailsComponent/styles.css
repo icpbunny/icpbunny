@@ -1,0 +1,48 @@
+.details_box p {
+  font-family: "Poppins";
+  font-size: 18px;
+  color: #2a2838;
+  line-height: 1.2;
+  /* margin-bottom: 0.1rem; */
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.details_box span {
+  display: block;
+  width: 100%;
+  font-family: "Bungee";
+  font-size: 15px;
+  color: #f35029;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.inputButton {
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: #ffffff;
+  padding: 5px 30px;
+  border: 1px solid transparent;
+  width: 100%;
+  border-radius: 5px;
+  height: 50px;
+  background: #fd643f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+}
+
+.inputButton:hover {
+  background: transparent;
+  border: 1px solid #60d3a0;
+  color: #60d3a0;
+}
