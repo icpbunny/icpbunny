@@ -1,5 +1,6 @@
 import Header from './pages/header';
 import Footer from './pages/footer';
+
 import './App.css';
 
 function App() {

@@ -173,7 +173,7 @@ class Breeding extends React.Component {
           <div className="col-2">
             <label>
               <input
-                className="radioWallet radio-connect"
+                className="radioWallet"
                 type="radio"
                 value="Plug"
                 checked={this.props.wallet === 'Plug'}
@@ -191,7 +191,7 @@ class Breeding extends React.Component {
           <div className="col-2">
             <label>
               <input
-                className="radioWallet radio-connect"
+                className="radioWallet"
                 type="radio"
                 value="Stoic"
                 checked={this.props.wallet === 'Stoic'}
@@ -261,12 +261,12 @@ class Breeding extends React.Component {
                           this.props.isPlugConnectionAllowed) ||
                           (this.props.wallet === 'Stoic' &&
                             this.props.isPlugConnectionAllowed)) && (
-                            <ImageGalleryComponent
-                              detailsArray={this.props.detailsArray}
-                              handleOnClickHomeEvent={this.handleOnClickHomeEvent}
-                              calledFrom="Breeding"
-                            />
-                          )}
+                          <ImageGalleryComponent
+                            detailsArray={this.props.detailsArray}
+                            handleOnClickHomeEvent={this.handleOnClickHomeEvent}
+                            calledFrom="Breeding"
+                          />
+                        )}
                       </div>
                     </div>
                   </div>

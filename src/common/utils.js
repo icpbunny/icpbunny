@@ -32,20 +32,6 @@ export function log(message) {
   }
 }
 
-export const sliceAddress = (address, slicePoint = 5) => (
-  <>
-    {address?.slice(0, slicePoint)}
-    ...
-    {address?.slice(address.length - slicePoint, address.length)}
-  </>
-);
-
-export const sliceSentence = (address, slicePoint = 45) => (
-  <>
-    {address?.slice(0, slicePoint)}...
-  </>
-);
-
 export function formatDate(UNIX_timestamp) {
   var a = new Date(UNIX_timestamp / 1000000);
 

@@ -10,9 +10,6 @@ import {
   carrotFactory,
   incubatorFactory,
   storage_array,
-  daoCanisterId,
-  daoFactory,
-  tokensFactory
 } from './factory';
 
 let g_myTokens = [];
@@ -20,7 +17,6 @@ let g_principalID = null;
 let g_bunnyActor = null;
 let g_carrotActor = null;
 let g_incubatorActor = null;
-let g_daoActor = null;
 let g_accountID = null;
 let g_no_of_incubation_days = 10;
 
@@ -33,7 +29,7 @@ const initPlugWallet = async () => {
   //Testing = hv2el-fyaaa-aaaah-qcenq-cai
   //Production = 2qrsq-uiaaa-aaaai-aa3zq-cai
   // Whitelist
-  const whitelist = [bunnyCanisterId, carrotCanisterId, incubatorCanisterId, daoCanisterId];
+  const whitelist = [bunnyCanisterId, carrotCanisterId, incubatorCanisterId];
 
   if (window.ic === undefined) {
     // alert("Please install the Plug Extension to continue.");
@@ -71,11 +67,6 @@ const initPlugWallet = async () => {
   g_incubatorActor = await window.ic.plug.createActor({
     canisterId: incubatorCanisterId,
     interfaceFactory: incubatorFactory,
-  });
-
-  g_daoActor = await window.ic.plug.createActor({
-    canisterId: daoCanisterId,
-    interfaceFactory: daoFactory,
   });
 
   g_principalID = await window.ic.plug.agent.getPrincipal();
@@ -118,15 +109,6 @@ const initStoicWallet = async () => {
       host: g_StoicURL,
     }),
     canisterId: incubatorCanisterId,
-  });
-
-  //Create a DAO actor
-  g_incubatorActor = Actor.createActor(daoFactory, {
-    agent: new HttpAgent({
-      identity: identity,
-      host: g_StoicURL,
-    }),
-    canisterId: daoCanisterId,
   });
 
   g_principalID = identity.getPrincipal();
@@ -243,7 +225,7 @@ const getBunniesPropertiesData = async () => {
         gallerydata.push(token);
       }
 
-      log('In getBunniesPropertiesData: END -------------------------');
+      log('In getBunniesPropertiesData: END -------------------------');        
 
       resolve(gallerydata);
     });
@@ -515,12 +497,12 @@ async function IncubatorUpdateCallback() {
   // log('IncubatorUpdateCallback: START');
 
   var incubatorTokens = [];
-
+  
   if (g_incubatorActor != null) {
     incubatorTokens = await g_incubatorActor.user_tokens(g_principalID);
     // log("incubatorTokens = " + incubatorTokens);
   }
-
+  
   let gallerydata = [];
 
   for (var i = 0; i < incubatorTokens.length; i++) {
@@ -534,11 +516,12 @@ async function IncubatorUpdateCallback() {
 
     const date_of_incubation_s = parseInt(bunnyData.properties[4].value);
     // log("date_of_incubation = " + date_of_incubation_s);
-
+    
     var date_of_birth_s = parseInt(bunnyData.properties[5].value);
     // log("date_of_birth_s = " + date_of_birth_s);
 
-    if (parseInt(date_of_birth_s) === 0) {
+    if(parseInt(date_of_birth_s) === 0)
+    {
       date_of_birth_s = date_of_incubation_s + (86400 * g_no_of_incubation_days);
     }
 
@@ -574,7 +557,7 @@ async function IncubatorUpdateCallback() {
       properties: properties,
     };
     gallerydata.push(token);
-
+    
   }
 
   // log('IncubatorUpdateCallback: END');
@@ -633,10 +616,10 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
 
       alert(
         'Breeding BabyBunny costs ' +
-        g_BreedingCost +
-        ' ICPCarrots.\nTransferring ' +
-        g_BreedingCost +
-        ' ICPCarrots now...'
+          g_BreedingCost +
+          ' ICPCarrots.\nTransferring ' +
+          g_BreedingCost +
+          ' ICPCarrots now...'
       );
       result = await g_carrotActor.walletTransfer(
         nCarrots,
@@ -664,8 +647,8 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
             {
               name: 'date_of_breeding', value: Math.floor(Date.now() / 1000) + '',
             }, //Unixtimestamp of today
-            {
-              name: 'date_of_birth', value: Math.floor(date_of_birth / 1000) + '',
+            { 
+              name: 'date_of_birth', value:  Math.floor(date_of_birth / 1000) + '',
             }, // 0
 
             { name: 'storage_canister', value: 'Not set' }, // “Not set”
@@ -690,7 +673,7 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
         if (_incubateBunny && _incubateBunny.id > 0) {
           alert(
             _incubateBunny.id +
-            ' is your incubator NFT. Your BabyBunny will be delivered after 10 days.'
+              ' is your incubator NFT. Your BabyBunny will be delivered after 10 days.'
           );
         }
 
@@ -708,117 +691,6 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
   return res;
 };
 
-const getCanisterData = async () => {
-  try {
-    if (g_daoActor != null) {
-      try {
-        const canisters = await g_daoActor.getCanisters();
-
-        const revealedCanisters = canisters.map((canister) => {
-          const [_, principal] = canister;
-
-          return { canisterName: principal.canisterName, principal: Principal.from(principal.canister).toText() }
-        })
-        const promises = revealedCanisters.map((canister) => {
-
-          return new Promise(async res => {
-            const actor = await window?.ic.plug.createActor({
-              canisterId: canister.principal,
-              interfaceFactory: tokensFactory,
-            });
-            res({ ...canister, fn: actor.tokens });
-          })
-
-        });
-        const actors = await Promise.all(promises);
-        log("actors", actors);
-
-        return actors;
-      } catch (error) {
-        log("Actors creation error", error);
-      }
-
-    }
-  } catch (error) {
-    log("DAO getCanister error", error);
-  }
-}
-
-const addQuestions = async ({
-  successRatio,
-  title,
-  question,
-  endTime,
-  discussionLink,
-  startTime,
-  canister,
-  options
-}) => {
-  if (g_daoActor != null) {
-    const queArgs = {
-      successRatio,
-      title,
-      question,
-      endTime,
-      discussionLink,
-      startTime,
-      canister,
-      options,
-    }
-    try {
-      const result = await g_daoActor.addQuestion(queArgs);
-      return result;
-    } catch (error) {
-      log("Add Ques error", error);
-    }
-  }
-}
-
-const getCanisterQuestions = async (_principal) => {
-  try {
-    const canisterQues = await g_daoActor.getCanisterQuestions(Principal.fromText(_principal));
-    return canisterQues
-  } catch (error) {
-    log("Get Canister Questions error", error);
-  }
-}
-
-const getProposal = async (_queId) => {
-  try {
-    const proposal = await g_daoActor.getQuestion(_queId);
-    return proposal;
-  } catch (error) {
-    console.log("Get Canister Questions error", error);
-  }
-}
-
-const addVoteForProposal = async (_args, _option, _votes) => {
-  try {
-    const votes = await g_daoActor.addVotes(_args, _option, _votes);
-    return votes;
-  } catch (error) {
-    console.log("Add votes error", error);
-  }
-}
-
-const getVoteForProposal = async (_queId) => {
-  try {
-    const votes = await g_daoActor.getVotes(_queId);
-    return votes;
-  } catch (error) {
-    console.log("Add votes error", error);
-  }
-}
-
-const isUserVoted = async (_args) => {
-  try {
-    const votedDetails = await g_daoActor.isUserVoted(_args);
-    return votedDetails;
-  } catch (error) {
-    console.log("Add votes error", error);
-  }
-}
-
 export {
   initPlugWallet,
   initStoicWallet,
@@ -829,19 +701,13 @@ export {
   getTransferCount,
   transferBunny,
   claimCarrots,
-  getProposal,
   getCarrotsCount,
   getTotalCarrotsSupply,
   getTotalCarrotHolders,
-  addVoteForProposal,
-  getVoteForProposal,
-  isUserVoted,
   transferCarrot,
   getPrincipal,
-  getCanisterQuestions,
-  addQuestions,
   ICPIncubate,
   getHeadersData,
+  //
   getIncubationsData,
-  getCanisterData
 };

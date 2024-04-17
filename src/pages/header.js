@@ -1,22 +1,17 @@
 import React from 'react';
-import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Breeding from './breeding';
 import Home from './home';
+import Breeding from './breeding';
 
 import { log } from '../common/utils';
-import DAO from './DAO';
-import Proposals from './proposals';
-import ProposalDetails from './proposalDetails';
 
 const icpwallet = require('../common/ICPPlugWallet');
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       close: true,
-      proposalCanisters: null,
 
       wallet: 'Plug',
 
@@ -44,12 +39,6 @@ class Header extends React.Component {
       close: !this.state.close,
     });
   };
-
-  handleLoading() {
-    this.setState({
-      close: !this.state.loading,
-    });
-  }
 
   componentDidMount() {
     this.getDataForInitialize();
@@ -100,11 +89,11 @@ class Header extends React.Component {
       detailsArray: detailsArray,
     });
 
-    icpwallet.getBunniesPropertiesData().then((detailsArray) => {
+    icpwallet.getBunniesPropertiesData().then( (detailsArray) => {
 
       this.setState({
         detailsArray: detailsArray,
-      });
+      });    
 
     });
   }
@@ -129,44 +118,11 @@ class Header extends React.Component {
       });
     });
 
-    icpwallet.getBunniesPropertiesData().then((detailsArray) => {
+    icpwallet.getBunniesPropertiesData().then( (detailsArray) => {
 
       this.setState({
         detailsArray: detailsArray,
-      });
-    });
-
-    icpwallet.getCanisterData().then(async (actors) => {
-      const accountId = window?.ic.plug.accountId;
-
-      if (accountId) {
-        const getTokens = actors.map(({ fn, ...canister }) => {
-          if (canister.canisterName !== "ICPBunny") {
-            return new Promise(async res => {
-              const tokens = await fn(accountId);
-              res({
-                ...canister,
-                tokens
-              })
-            })
-          } else {
-            return {
-              ...canister,
-              tokens: { ok: [] }
-            }
-          }
-        })
-
-        const allData = await Promise.all(getTokens);
-
-        this.setState({
-          proposalCanisters: allData,
-        });
-      } else {
-        this.setState({
-          proposalCanisters: [],
-        });
-      }
+      });    
     });
 
     setInterval(this.updateCallback, 1000 * 60 * 5); //5 minutes
@@ -346,12 +302,6 @@ class Header extends React.Component {
                             Breeding
                           </Link>
                         </li>
-
-                        <li className="nav-item">
-                          <Link to="/DAO" className="nav-link">
-                            DAO
-                          </Link>
-                        </li>
                       </ul>
                     </div>
                   </nav>
@@ -374,60 +324,6 @@ class Header extends React.Component {
               />
             </Route>
 
-            <Route path="/proposal/:queId">
-              <ProposalDetails
-                isPlugExtensionAvailable={this.state.isPlugExtensionAvailable}
-                isPlugConnectionAllowed={this.state.isPlugConnectionAllowed}
-                wallet={this.state.wallet}
-                headersData={this.state.headersData}
-                detailsArray={this.state.detailsArray}
-                proposalCanisters={this.state.proposalCanisters}
-                loading={this.state.loading}
-                onLoading={this.handleLoading}
-                principalID={this.state.principalID}
-                onWalletRadioValueChange={this.onWalletRadioValueChange}
-                onClaimCarrortsComplete={this.onClaimCarrortsComplete}
-                onTransferCarrortsComplete={this.onTransferCarrortsComplete}
-                onBunnyTransferCompleted={this.onBunnyTransferCompleted}
-              />
-            </Route>
-
-            <Route path="/proposals">
-              <Proposals
-                isPlugExtensionAvailable={this.state.isPlugExtensionAvailable}
-                isPlugConnectionAllowed={this.state.isPlugConnectionAllowed}
-                wallet={this.state.wallet}
-                headersData={this.state.headersData}
-                detailsArray={this.state.detailsArray}
-                proposalCanisters={this.state.proposalCanisters}
-                loading={this.state.loading}
-                onLoading={this.handleLoading}
-                principalID={this.state.principalID}
-                onWalletRadioValueChange={this.onWalletRadioValueChange}
-                onClaimCarrortsComplete={this.onClaimCarrortsComplete}
-                onTransferCarrortsComplete={this.onTransferCarrortsComplete}
-                onBunnyTransferCompleted={this.onBunnyTransferCompleted}
-              />
-            </Route>
-
-            <Route path="/DAO">
-              <DAO
-                isPlugExtensionAvailable={this.state.isPlugExtensionAvailable}
-                isPlugConnectionAllowed={this.state.isPlugConnectionAllowed}
-                wallet={this.state.wallet}
-                headersData={this.state.headersData}
-                detailsArray={this.state.detailsArray}
-                proposalCanisters={this.state.proposalCanisters}
-                loading={this.state.loading}
-                onLoading={this.handleLoading}
-                principalID={this.state.principalID}
-                onWalletRadioValueChange={this.onWalletRadioValueChange}
-                onClaimCarrortsComplete={this.onClaimCarrortsComplete}
-                onTransferCarrortsComplete={this.onTransferCarrortsComplete}
-                onBunnyTransferCompleted={this.onBunnyTransferCompleted}
-              />
-            </Route>
-
             <Route path="/">
               <Home
                 isPlugExtensionAvailable={this.state.isPlugExtensionAvailable}
@@ -443,8 +339,6 @@ class Header extends React.Component {
                 onBunnyTransferCompleted={this.onBunnyTransferCompleted}
               />
             </Route>
-
-
           </Switch>
         </Router>
       </div>
