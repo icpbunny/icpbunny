@@ -1,4 +1,4 @@
-const isDebug = true;
+const isDebug = false;
 
 export function nFormatter(num, digits) {
   const lookup = [

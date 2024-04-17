@@ -225,7 +225,7 @@ const getBunniesPropertiesData = async () => {
         gallerydata.push(token);
       }
 
-      log('In getBunniesPropertiesData: END -------------------------');        
+      log('In getBunniesPropertiesData: END -------------------------');
 
       resolve(gallerydata);
     });
@@ -497,12 +497,12 @@ async function IncubatorUpdateCallback() {
   // log('IncubatorUpdateCallback: START');
 
   var incubatorTokens = [];
-  
+
   if (g_incubatorActor != null) {
     incubatorTokens = await g_incubatorActor.user_tokens(g_principalID);
     // log("incubatorTokens = " + incubatorTokens);
   }
-  
+
   let gallerydata = [];
 
   for (var i = 0; i < incubatorTokens.length; i++) {
@@ -516,12 +516,11 @@ async function IncubatorUpdateCallback() {
 
     const date_of_incubation_s = parseInt(bunnyData.properties[4].value);
     // log("date_of_incubation = " + date_of_incubation_s);
-    
+
     var date_of_birth_s = parseInt(bunnyData.properties[5].value);
     // log("date_of_birth_s = " + date_of_birth_s);
 
-    if(parseInt(date_of_birth_s) === 0)
-    {
+    if (parseInt(date_of_birth_s) === 0) {
       date_of_birth_s = date_of_incubation_s + (86400 * g_no_of_incubation_days);
     }
 
@@ -557,7 +556,7 @@ async function IncubatorUpdateCallback() {
       properties: properties,
     };
     gallerydata.push(token);
-    
+
   }
 
   // log('IncubatorUpdateCallback: END');
@@ -616,10 +615,10 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
 
       alert(
         'Breeding BabyBunny costs ' +
-          g_BreedingCost +
-          ' ICPCarrots.\nTransferring ' +
-          g_BreedingCost +
-          ' ICPCarrots now...'
+        g_BreedingCost +
+        ' ICPCarrots.\nTransferring ' +
+        g_BreedingCost +
+        ' ICPCarrots now...'
       );
       result = await g_carrotActor.walletTransfer(
         nCarrots,
@@ -647,8 +646,8 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
             {
               name: 'date_of_breeding', value: Math.floor(Date.now() / 1000) + '',
             }, //Unixtimestamp of today
-            { 
-              name: 'date_of_birth', value:  Math.floor(date_of_birth / 1000) + '',
+            {
+              name: 'date_of_birth', value: Math.floor(date_of_birth / 1000) + '',
             }, // 0
 
             { name: 'storage_canister', value: 'Not set' }, // “Not set”
@@ -673,7 +672,7 @@ const ICPIncubate = async (parentToken1, parentToken2) => {
         if (_incubateBunny && _incubateBunny.id > 0) {
           alert(
             _incubateBunny.id +
-              ' is your incubator NFT. Your BabyBunny will be delivered after 10 days.'
+            ' is your incubator NFT. Your BabyBunny will be delivered after 10 days.'
           );
         }
 

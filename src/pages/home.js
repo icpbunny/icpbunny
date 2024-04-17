@@ -23,16 +23,16 @@ class Home extends React.Component {
       searchText: '',
       nCarrots: 0,
       nCarrotsDisplay: 0,
-//
+      //
       bIsBunnyTab: true,
       bIsCarrotsTab: false,
       bIsIncubatorsTab: false,
-//
+      //
       bIsClaimStarted: false,
       bIsClaimCompleted: false,
       bIsClaimInProgress: false,
       claimMessage: '',
-      incubationsData:null
+      incubationsData: null
     };
 
     this.onWalletRadioValueChange = this.onWalletRadioValueChange.bind(this);
@@ -174,7 +174,7 @@ class Home extends React.Component {
     this.setState({ bIsBunnyTab: false });
     this.setState({ bIsCarrotsTab: true });
     this.setState({ bIsIncubatorsTab: false });
-    
+
   };
 
   handleMyIncubatorsClick = async () => {
@@ -372,6 +372,17 @@ class Home extends React.Component {
               <img src="/images/stoicwallet_logo.png" alt="" width="55px"></img>
             </label>
           </div>
+
+          <div className="col-2">
+            <a href='http://localhost:3001' target='_blank' rel="noreferrer">
+              <img src="/images/Bitcoin.png" alt="" width="55px"></img>
+              <label className="walet" style={{ cursor: "pointer" }}>
+                <h5>
+                  Wallet
+                </h5>
+              </label>
+            </a>
+          </div>
         </div>
 
         {/* Principal */}
@@ -531,14 +542,14 @@ class Home extends React.Component {
                             this.props.isPlugConnectionAllowed) ||
                             (this.props.wallet === 'Stoic' &&
                               this.props.isPlugConnectionAllowed)) && (
-                            <ImageGalleryComponent
-                              detailsArray={this.props.detailsArray}
-                              handleOnClickHomeEvent={
-                                this.handleOnClickHomeEvent
-                              }
-                              calledFrom="Home"
-                            />
-                          )}
+                              <ImageGalleryComponent
+                                detailsArray={this.props.detailsArray}
+                                handleOnClickHomeEvent={
+                                  this.handleOnClickHomeEvent
+                                }
+                                calledFrom="Home"
+                              />
+                            )}
                         </div>
                       </div>
                     </div>
@@ -608,7 +619,7 @@ class Home extends React.Component {
                       aria-labelledby="ex1-tab-3"
                     >
                       <div className="col-md-12">
-                        <div className="row">                         
+                        <div className="row">
                           {
                             <IncubatorGalleryComponent
                               detailsArray={this.state.incubationsData}

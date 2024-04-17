@@ -1,0 +1,91 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.bitcoin-logo {
+  height: 230px;
+  pointer-events: none;
+  margin-top: 1.5em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bitcoin-logo {
+    animation: bitcoin-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #0B1215;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  font-size: calc(10px + 3vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes bitcoin-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button {
+  /* padding: 17px 40px; */
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  width: 350px;
+  height: 70px;
+  border: 0;
+  background-color: #f79413;
+  letter-spacing: 1.5px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: #f6ac4c 0px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
+  cursor: pointer;
+}
+
+.button:hover {
+  /* box-shadow: #f6ac4c 0px 7px 0px 0px; */
+  scale: 0.98;
+}
+
+.button:active {
+  background-color: #f79413;
+  /*50, 168, 80*/
+  box-shadow: #f6ac4c 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+
+.button>div {
+  display: flex;
+  align-items: center;
+  margin-left: 85px;
+  gap: 20px;
+}
+
+.button:nth-child(4)>div img {
+  border-radius: 5px;
+}
+
+.button:nth-child(5)>div img,
+.button:nth-child(6)>div img {
+  background-color: #0B1215;
+  padding: 5px;
+  border-radius: 5px;
+}

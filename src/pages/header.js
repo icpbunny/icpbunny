@@ -89,11 +89,11 @@ class Header extends React.Component {
       detailsArray: detailsArray,
     });
 
-    icpwallet.getBunniesPropertiesData().then( (detailsArray) => {
+    icpwallet.getBunniesPropertiesData().then((detailsArray) => {
 
       this.setState({
         detailsArray: detailsArray,
-      });    
+      });
 
     });
   }
@@ -118,11 +118,11 @@ class Header extends React.Component {
       });
     });
 
-    icpwallet.getBunniesPropertiesData().then( (detailsArray) => {
+    icpwallet.getBunniesPropertiesData().then((detailsArray) => {
 
       this.setState({
         detailsArray: detailsArray,
-      });    
+      });
     });
 
     setInterval(this.updateCallback, 1000 * 60 * 5); //5 minutes
@@ -301,6 +301,12 @@ class Header extends React.Component {
                           <Link to="/breeding" className="nav-link">
                             Breeding
                           </Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <a href="https://fw25x-naaaa-aaaal-adbpq-cai.icp0.io/" target='_blank' className="nav-link" rel="noreferrer">
+                            DAO
+                          </a>
                         </li>
                       </ul>
                     </div>

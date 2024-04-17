@@ -200,6 +200,17 @@ class Breeding extends React.Component {
               <img src="/images/stoicwallet_logo.png" alt="" width="55px"></img>
             </label>
           </div>
+
+          <div className="col-2">
+            <a href='http://localhost:3001' target='_blank' rel="noreferrer">
+              <img src="/images/Bitcoin.png" alt="" width="55px"></img>
+              <label className="walet" style={{ cursor: "pointer" }}>
+                <h5>
+                  Wallet
+                </h5>
+              </label>
+            </a>
+          </div>
         </div>
 
         {/* Principal */}
@@ -261,12 +272,12 @@ class Breeding extends React.Component {
                           this.props.isPlugConnectionAllowed) ||
                           (this.props.wallet === 'Stoic' &&
                             this.props.isPlugConnectionAllowed)) && (
-                          <ImageGalleryComponent
-                            detailsArray={this.props.detailsArray}
-                            handleOnClickHomeEvent={this.handleOnClickHomeEvent}
-                            calledFrom="Breeding"
-                          />
-                        )}
+                            <ImageGalleryComponent
+                              detailsArray={this.props.detailsArray}
+                              handleOnClickHomeEvent={this.handleOnClickHomeEvent}
+                              calledFrom="Breeding"
+                            />
+                          )}
                       </div>
                     </div>
                   </div>
